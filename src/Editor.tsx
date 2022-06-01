@@ -1,40 +1,3 @@
-// import { useEffect, useRef } from "react";
-// import TextareaAutosize from "react-textarea-autosize";
-
-// export default function Editor() {
-//   const ref = useRef<HTMLInputElement>(null);
-
-//   useEffect(() => {
-//     ref.current?.focus();
-//   }, []);
-//   return (
-// <section className="flex flex-col w-full	">
-//   <div className="max-w-full	bg-white relative h-[45px]"></div>
-//   <form
-//     className="grow-0	shrink-1 flex flex-col max-h-full w-[900px] mx-auto"
-//     style={{ height: "calc(100vh - 45px)" }}
-//   >
-//     <div className="px-[96px] mt-[100px]">
-//       <h1 className="whitespace-pre-wrap	text-4xl	font-bold	py-[3px]">
-//         <input
-//           type="text"
-//           ref={ref}
-//           placeholder="Untitled"
-//           className="w-full outline-0	"
-//         />
-//       </h1>
-//     </div>
-//     <div className="shrink-0 grow-1 items-start flex-column text-base px-[96px] pb-[30vh] pt-[5px]">
-//       <TextareaAutosize
-//         placeholder="Type '/' for commands"
-//         className="resize-none	py-[3px] w-full outline-0	"
-//       />
-//     </div>
-//   </form>
-// </section>
-//   );
-// }
-
 import { useReducer, useRef, useEffect } from "react";
 import ContentBlock from "./components/content-block";
 import { reducer, initialState, ActionKind } from "./reducer";
@@ -59,7 +22,8 @@ export default function Editor() {
   }, [content]);
 
   useEffect(() => {
-    setFocusOn(focusIndex);
+    // console.log(focusIndex);
+    setFocusOn(focusIndex + 1);
   }, [focusIndex]);
 
   function setFocusOn(idx: number) {
@@ -101,12 +65,6 @@ export default function Editor() {
               />
             </h1>
           </div>
-          {/* <div className="shrink-0 grow-1 items-start flex-column text-base px-[96px] pb-[30vh] pt-[5px]">
-          <TextareaAutosize
-            placeholder="Type '/' for commands"
-            className="resize-none	py-[3px] w-full outline-0	"
-          />
-        </div> */}
 
           {content?.map(({ tag, value, id }: any, idx: number) => {
             return (
@@ -126,7 +84,6 @@ export default function Editor() {
                     type: ActionKind.AddSpace,
                     payload: { idx: focusIndex },
                   });
-                  // setFocusOnNextContent(idx);
                 }}
                 addContent={(payload: any) =>
                   dispatch({ type: ActionKind.AddContent, payload })
@@ -140,7 +97,8 @@ export default function Editor() {
 
           <div className="shrink-0 grow-1 items-start flex-column text-base pb-[30vh] pt-[5px]">
             <div
-              style={{ height: "80vh", cursor: "text" }}
+              className="h-[80vh] cursor-text"
+              // style={{ height: "80vh", cursor: "text" }}
               onClick={() => {
                 dispatch({ type: ActionKind.Focus });
               }}

@@ -42,6 +42,10 @@ export default function TextareaBlock({
     }
   }, [value, addContent]);
 
+  useEffect(() => {
+    ref.current?.focus();
+  }, []);
+
   return (
     <TextareaAutosize
       style={{ paddingLeft: 20, marginLeft: -20 }}

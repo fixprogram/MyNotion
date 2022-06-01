@@ -16,9 +16,9 @@ export default function TextBlock({
 }) {
   const [value, setValue] = useState(initialValue);
 
-  useEffect(() => {
-    refName.target?.current();
-  }, []);
+  // useEffect(() => {
+  //   refName.target?.current();
+  // }, []);
 
   useEffect(() => {
     if (refName.target) {
